@@ -559,6 +559,9 @@
     <Content Include="Views\Tutorial\DependencyInjection.cshtml" />
     <Content Include="Views\Tutorial\TemplatingLinksImages.cshtml" />
     <Content Include="Views\Tutorial\Location.cshtml" />
+    <Content Include="Views\Tutorial\RoutingMultipleIndex.cshtml" />
+    <Content Include="Views\Tutorial\RoutingMultipleTabMain.cshtml" />
+    <Content Include="Views\Tutorial\RoutingMultipleTabDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

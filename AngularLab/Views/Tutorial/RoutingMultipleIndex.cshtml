@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "RoutingMultipleIndex";
+}
+
+<h2>RoutingMultipleIndex</h2>
+<div >
+    <ul class="nav nav-tabs">
+        <li ><a href="#/Tutorial/RoutingIndex">Main</a></li>
+        <li><a href="#/Tutorial/RoutingDetail/1">Detail</a></li>
+
+    </ul>
+    <div class="tab-content">
+        <div ng-app="myApp"  ng-view>
+
+
+        </div>
+
+
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        var app = angular.module("myApp", ['ngRoute']);
+        var mainCtrl = app.controller("mainCtrl", function ($scope, $route, $routeParams, $http) {
+            $scope.mainName = "This is main";
+        });
+
+        var detailCtrl = app.controller("detailCtrl", function ($scope, $route, $routeParams) {
+            $scope.detailId = $routeParams.id;
+        });
+
+        app.config(function ($routeProvider) {
+            $routeProvider.when("/Tutorial/RoutingIndex", { templateUrl: "/Tutorial/RoutingMultipleTabMain", controller: "mainCtrl" })
+            .when("/Tutorial/RoutingDetail/:id", { templateUrl: "/Tutorial/RoutingMultipleTabDetail", controller: "detailCtrl" })
+            .otherwise({ redirectTo: "/Tutorial/RoutingIndex" })
+            ;
+        });
+    </script>
+}
