@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "DataBinding";
+}
+
+<h2>DataBinding</h2>
+Source:<a href="https://docs.angularjs.org/tutorial/step_04" target="_blank">Two-way Data Binding</a>
+重點:將選擇的排序與$scope.orderBy及UI作雙向繫結
+<div ng-app="phoneApp">
+    <div class="container-fluid">
+        <div class="row" ng-controller="phoneCtrl">
+            <div class="col-md-2">
+                Search:<input ng-model="query" />
+                Sort by: <select ng-model="orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="age">Newest</option>
+                </select>
+            </div>
+            <div class="col-md-10">
+                <ul>
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                        {{phone.name}}
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope) {
+            $scope.phones = [
+                {
+                    'name': 'Nexus S',
+                    'snippet': 'Fast just got faster with Nexus S.',
+                    'age': 1
+                },
+                {
+                    'name': 'Motorola XOOM™ with Wi-Fi',
+                    'snippet': 'The Next, Next Generation tablet.',
+                    'age': 2
+                },
+                {
+                    'name': 'MOTOROLA XOOM™',
+                    'snippet': 'The Next, Next Generation tablet.',
+                    'age': 3
+                }
+            ];
+            $scope.orderProp = "age";
+        });
+    </script>
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope) {
+            $scope.phones = [
+                {
+                    'name': 'Nexus S',
+                    'snippet': 'Fast just got faster with Nexus S.',
+                    'age': 1
+                },
+                {
+                    'name': 'Motorola XOOM™ with Wi-Fi',
+                    'snippet': 'The Next, Next Generation tablet.',
+                    'age': 2
+                },
+                {
+                    'name': 'MOTOROLA XOOM™',
+                    'snippet': 'The Next, Next Generation tablet.',
+                    'age': 3
+                }
+            ];
+            $scope.orderProp = "age";
+        });
+    </script>
+}

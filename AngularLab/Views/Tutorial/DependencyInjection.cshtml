@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "DependencyInjection";
+}
+
+<h2>DependencyInjection</h2>
+Source:<a href="https://docs.angularjs.org/tutorial/step_05" target="_blank">Two-way Data Binding</a>
+重點:$http的注入
+<div ng-app="phoneApp">
+    <div class="container-fluid">
+        <div class="row" ng-controller="phoneCtrl">
+            <div class="col-md-2">
+                Search:<input ng-model="query" /><br />
+                Sort by: <select ng-model="orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="age">Newest</option>
+                </select>
+            </div>
+            <div class="col-md-10">
+                <ul>
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                        {{phone.name}}
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        phoneApp.controller("phoneCtrl", function ($scope, $http) {
+            $http.get('@Url.Content("~/Content/phones.txt")').success(function (data) {
+                $scope.phones = data;
+            });
+            $scope.orderProp = 'age';
+        });
+    </script>
+}

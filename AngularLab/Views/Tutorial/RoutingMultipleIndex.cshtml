@@ -12,10 +12,7 @@
     <div class="tab-content">
         <div ng-app="myApp"  ng-view>
 
-
         </div>
-
-
     </div>
 </div>
 @section scripts{
@@ -30,6 +27,7 @@
             $scope.detailId = $routeParams.id;
         });
 
+        //此部份的重點是會取#後方的Url來對應實際Html
         app.config(function ($routeProvider) {
             $routeProvider.when("/Tutorial/RoutingIndex", { templateUrl: "/Tutorial/RoutingMultipleTabMain", controller: "mainCtrl" })
             .when("/Tutorial/RoutingDetail/:id", { templateUrl: "/Tutorial/RoutingMultipleTabDetail", controller: "detailCtrl" })

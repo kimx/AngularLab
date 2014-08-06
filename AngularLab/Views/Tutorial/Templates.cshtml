@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Templates";
+}
+Source:<a href="https://docs.angularjs.org/tutorial/step_02" target="_blank">Angular Templates</a>
+重點:基本樣板
+<h2>Templates</h2>
+<div ng-app="phoneApp" ng-controller="phoneCtrl">
+    <ul>
+        <li ng-repeat="phone in phones">
+            {{phone.name}}
+            -{{phone.snippet}}
+        </li>
+    </ul>
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope) {
+            $scope.phones = [
+            { 'name': 'kim', 'snippet': '1' }
+           , { 'name': 'kimx', 'snippet': '2' }
+            ];
+        });
+    </script>
+}

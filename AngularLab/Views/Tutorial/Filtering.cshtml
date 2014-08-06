@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Filtering";
+}
+
+<h2>Filtering</h2>
+Source:<a href="https://docs.angularjs.org/tutorial/step_03" target="_blank">Filtering Repeaters</a>
+重點:透過輸入作過濾功能
+<div ng-app="phoneApp">
+    <div class="container-fluid">
+        <div class="row" ng-controller="phoneCtrl">
+            <div class="col-md-2">
+                Search:<input ng-model="query" />
+            </div>
+            <div class="col-md-10">
+                <ul class="phones">
+                    <li ng-repeat="phone in phones | filter:query">
+                        {{phone.name}}
+                        <p>{{phone.snippet}}</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope) {
+            $scope.phones = [
+                {
+                    'name': 'Nexus S',
+                    'snippet': 'Fast just got faster with Nexus S.'
+                },
+    {
+        'name': 'Motorola XOOM™ with Wi-Fi',
+        'snippet': 'The Next, Next Generation tablet.'
+    },
+    {
+        'name': 'MOTOROLA XOOM™',
+        'snippet': 'The Next, Next Generation tablet.'
+    }
+            ];
+        });
+    </script>
+}

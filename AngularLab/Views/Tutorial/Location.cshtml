@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Location";
+}
+
+<h2>Location</h2>
+重點:只是改變Urll，但沒有實際導頁
+<div ng-app="phoneApp" ng-controller="phoneCtrl">
+    <input type="text" />
+    <button class="btn btn-default" ng-click="change();">Change</button>
+    <div>protocol:{{protocol}}</div>
+    <div>host:{{host}}</div>
+    <div>port:{{port}}</div>
+    <div>path:{{path}}</div>
+    <div>search:{{search}}</div>
+    <div>hash:{{hash}}</div>
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", []);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope, $location) {
+            $scope.change = function () {
+                $location.path("/Tutorial/Templates");
+                $scope.protocol = $location.protocol();
+                $scope.host = $location.host();
+                $scope.port = $location.port();
+                $scope.path = $location.path();
+                $scope.search = $location.search();
+                $scope.hash = $location.hash();
+            };
+        });
+    </script>
+
+}
