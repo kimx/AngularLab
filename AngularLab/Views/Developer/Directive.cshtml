@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Developer";
+}
+
+<div ng-app="staticTemplateApp" class="panel panel-primary">
+    <div class="panel-heading">Directive-Static Template</div>
+    <div ng-controller="myCtrl" class="panel-body">
+        <div my-customer></div>
+    </div>
+</div>
+
+<div id="restrictApp" ng-app="restrictApp" class="panel panel-info">
+    <div class="panel-heading">Directive-Restrict</div>
+    <div ng-controller="myCtrl" class="panel-body">
+        <my-customer></my-customer>
+    </div>
+</div>
+<div id="isoApp" ng-app="isoApp" class="panel panel-success">
+    <div class="panel-heading">Directive-Isolate</div>
+    <div ng-controller="myCtrl" class="panel-body">
+        <my-customer info="naomi"></my-customer>
+    </div>
+</div>
+@section scripts{
+<script src="~/Scripts/Developer/Directive.js"></script>
+    <script>
+        
+    </script>
+}
