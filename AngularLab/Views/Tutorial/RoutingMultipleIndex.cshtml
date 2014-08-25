@@ -29,7 +29,8 @@
 
         //此部份的重點是會取#後方的Url來對應實際Html
         app.config(function ($routeProvider) {
-            $routeProvider.when("/Tutorial/RoutingIndex", { templateUrl: "/Tutorial/RoutingMultipleTabMain", controller: "mainCtrl" })
+            $routeProvider
+            .when("/Tutorial/RoutingIndex", { templateUrl: "/Tutorial/RoutingMultipleTabMain", controller: "mainCtrl" })
             .when("/Tutorial/RoutingDetail/:id", { templateUrl: "/Tutorial/RoutingMultipleTabDetail", controller: "detailCtrl" })
             .otherwise({ redirectTo: "/Tutorial/RoutingIndex" })
             ;
