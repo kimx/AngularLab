@@ -1,26 +1,40 @@
 ﻿@{
     ViewBag.Title = "Developer";
 }
-
+Directive Doc:<a href="https://docs.angularjs.org/guide/directive">Link</a>
 <div ng-app="staticTemplateApp" class="panel panel-primary">
-    <div class="panel-heading">Directive-Static Template</div>
+    <div class="panel-heading">Template-expanding directive</div>
     <div ng-controller="myCtrl" class="panel-body">
         <div my-customer></div>
     </div>
 </div>
 
 <div id="restrictApp" ng-app="restrictApp" class="panel panel-info">
-    <div class="panel-heading">Directive-Restrict</div>
+    <div class="panel-heading">Template-expanding Restrict</div>
     <div ng-controller="myCtrl" class="panel-body">
         <my-customer></my-customer>
     </div>
 </div>
 <div id="isoApp" ng-app="isoApp" class="panel panel-success">
-    <div class="panel-heading">Directive-Isolate</div>
+    <div class="panel-heading">Isolating the Scope of a Directive</div>
     <div ng-controller="myCtrl" class="panel-body">
         <my-customer info="naomi"></my-customer>
     </div>
 </div>
+<div id="manApp" ng-app="manApp" class="panel panel-warning">
+    <div class="panel-heading">Creating a Directive that Manipulates the DOM</div>
+    <div ng-controller="myCtrl" class="panel-body">
+        Date format: <input ng-model="format"> <hr />
+        Current time is: <span my-current-time="format"></span>
+    </div>
+</div>
+<div id="wrapApp" ng-app="wrapApp" class="panel panel-danger">
+    <div class="panel-heading">Creating a Directive that Wraps Other Elements</div>
+    <div ng-controller="myCtrl" class="panel-body">
+     <my-dialog>Check out the contents,{{name}}</my-dialog>
+    </div>
+</div>
+
 @section scripts{
 <script src="~/Scripts/Developer/Directive.js"></script>
     <script>
