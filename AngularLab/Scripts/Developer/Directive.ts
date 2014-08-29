@@ -84,16 +84,51 @@ angular.module("wrapApp", [])
         $scope.name = "Kim";
     })
     .directive("myDialog", function () {
-        var d:ng.IDirective = {
-            restrict:"E",
+        var d: ng.IDirective = {
+            restrict: "E",
             transclude: true,
             template: "<div class='kim' ng-transclude></div>",
+            //以下為此主題的第二範例
+            scope: {},//重新定scope
+            link: function (scope, element) {
+                scope.name = "Kim 2";//不會顯示Kim 2因為上一行已重新定了scope
+            }
         };
         return d;
     });
+
+//Wraps Other Elements2 主要說明在scope用$attr可以公開屬性來繫結其他行為
+angular.module("wrapAppAttr", [])
+    .controller("myCtrl", function ($scope, $timeout: ng.ITimeoutService) {
+        $scope.name = 'Tobias';
+        $scope.hideDialog = function () {
+            $scope.dialogIsHidden  = true;
+            $timeout(function () {
+                $scope.dialogIsHidden = false;
+            }, 2000);
+        };
+    })
+    .directive("myDialog", function () {
+        var d: ng.IDirective = {
+            restrict: "E",
+            transclude: true,
+            template: "<div class='alert'>"+
+            "<a href class='close' ng-click='close2()'>&times;</a>"+
+            " <div ng-transclude></div>"+
+            "</div>",
+            scope: {
+                //公開屬性讓on-close繫結行為
+                //ng-click觸發close2-->觸發外層的on-close行為hideDialog
+                close2:"&onClose"
+            }
+        };
+        return d;
+    });
+
 
 //一個網頁多個module的設定
 angular.bootstrap(document.getElementById("restrictApp"), ['restrictApp']);
 angular.bootstrap(document.getElementById("isoApp"), ['isoApp']);
 angular.bootstrap(document.getElementById("manApp"), ['manApp']);
 angular.bootstrap(document.getElementById("wrapApp"), ['wrapApp']);
+angular.bootstrap(document.getElementById("wrapAppAttr"), ['wrapAppAttr']);

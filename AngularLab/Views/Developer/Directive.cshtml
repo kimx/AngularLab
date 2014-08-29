@@ -31,13 +31,21 @@ Directive Doc:<a href="https://docs.angularjs.org/guide/directive">Link</a>
 <div id="wrapApp" ng-app="wrapApp" class="panel panel-danger">
     <div class="panel-heading">Creating a Directive that Wraps Other Elements</div>
     <div ng-controller="myCtrl" class="panel-body">
-     <my-dialog>Check out the contents,{{name}}</my-dialog>
+        <my-dialog>Check out the contents,{{name}}</my-dialog>
+    </div>
+</div>
+<div id="wrapAppAttr" class="panel panel-danger">
+    <div class="panel-heading">Creating a Directive that Wraps Other Elements-屬性API</div>
+    <div ng-controller="myCtrl" class="panel-body">
+        <my-dialog ng-hide="dialogIsHidden" on-close="hideDialog()">
+            Check out the contents, {{name}}!
+        </my-dialog>
     </div>
 </div>
 
 @section scripts{
-<script src="~/Scripts/Developer/Directive.js"></script>
+    <script src="~/Scripts/Developer/Directive.js"></script>
     <script>
-        
+
     </script>
 }
