@@ -102,7 +102,7 @@ angular.module("wrapAppAttr", [])
     .controller("myCtrl", function ($scope, $timeout: ng.ITimeoutService) {
         $scope.name = 'Tobias';
         $scope.hideDialog = function () {
-            $scope.dialogIsHidden  = true;
+            $scope.dialogIsHidden = true;
             $timeout(function () {
                 $scope.dialogIsHidden = false;
             }, 2000);
@@ -112,19 +112,106 @@ angular.module("wrapAppAttr", [])
         var d: ng.IDirective = {
             restrict: "E",
             transclude: true,
-            template: "<div class='alert'>"+
-            "<a href class='close' ng-click='close2()'>&times;</a>"+
-            " <div ng-transclude></div>"+
+            template: "<div class='alert'>" +
+            "<a href class='close' ng-click='close2()'>&times;</a>" +
+            " <div ng-transclude></div>" +
             "</div>",
             scope: {
                 //公開屬性讓on-close繫結行為
                 //ng-click觸發close2-->觸發外層的on-close行為hideDialog
-                close2:"&onClose"
+                close2: "&onClose"
             }
+        };
+        return d;
+    })
+;
+
+//Creating a Directive that Adds Event Listeners
+angular.module("evtApp", [])
+    .directive("myDraggable", function ($document) {
+        function link(scope, element, attr) {
+            var startX = 0, startY = 0, x = 0, y = 0;
+     
+            element.css({
+                position: 'relative',
+                border: '1px solid red',
+                backgroundColor: 'lightgrey',
+                cursor: 'pointer'
+            });
+
+            element.on("mousedown", function (event) {
+                event.preventDefault();
+                startX = event.pageX - x;
+                startY = event.pageY - y;
+                $document.on("mousemove", mousemove);
+                $document.on("mouseup", mouseup);
+            });
+
+            function mousemove(event) {
+                y = event.pageY - startY;
+                x = event.pageX - startX;
+                element.css({
+                    top: y + "px",
+                    left: x + "px",
+                });
+            }
+
+            function mouseup() {
+                $document.off("mousemove", mousemove);
+                $document.off("mouseup", mouseup);
+            }
+        };
+
+        var d: ng.IDirective = {
+            link: link,
+            restrict: "AE"//Default A
         };
         return d;
     });
 
+//Creating Directives that Communicate
+angular.module("comuApp", [])
+    .directive("myTabs", function () {
+        var d: ng.IDirective = {
+            restrict: "E",
+            transclude: true,
+            scope: {},
+            templateUrl: 'my-tabs.html',
+            controller: function ($scope) {
+                var panes = $scope.panes = [];
+                $scope.select = function (currentPane) {
+                    angular.forEach(panes, function (pane) {
+                        pane.selected = false;
+                    });
+                    currentPane.selected = true;
+                };
+
+                this.addPane = function (pane) {
+                    if (panes.length === 0) {
+                        $scope.select(pane);
+                    }
+                    panes.push(pane);
+                };
+            },
+        };
+        return d;
+    })
+    .directive("myPane", function () {
+        var d: ng.IDirective = {
+            require: "^myTabs",//^資料來源限制為父節點<my-tabs>,才取得到myTab的controller
+            restrict: "E",
+            transclude: true,
+            scope: {
+                title2: "@title",//寫@或@attr=@title為以繫來源attribute=title,my-pane有屬性title需作轉換
+            },
+            link: function (scope, element, attr, tabsCtrl) {
+                tabsCtrl.addPane(scope);
+            },
+            templateUrl: 'my-pane.html'
+        };
+        return d;
+    })
+;
 
 //一個網頁多個module的設定
 angular.bootstrap(document.getElementById("restrictApp"), ['restrictApp']);
@@ -132,3 +219,5 @@ angular.bootstrap(document.getElementById("isoApp"), ['isoApp']);
 angular.bootstrap(document.getElementById("manApp"), ['manApp']);
 angular.bootstrap(document.getElementById("wrapApp"), ['wrapApp']);
 angular.bootstrap(document.getElementById("wrapAppAttr"), ['wrapAppAttr']);
+angular.bootstrap(document.getElementById("evtApp"), ['evtApp']);
+angular.bootstrap(document.getElementById("comuApp"), ['comuApp']);
