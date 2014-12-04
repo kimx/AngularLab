@@ -1052,7 +1052,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\controller\indexController.ts" />
+    <TypeScriptCompile Include="app\controller\indexController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="app\model\categoryModel.ts" />
     <TypeScriptCompile Include="app\model\productModel.ts" />
     <TypeScriptCompile Include="app\scope\indexScope.ts" />

@@ -1,5 +1,5 @@
 ﻿<div ng-app="crudApp">
-    <div ng-controller="indexCtrl" ng-init="event.init('Kim')">
+    <div ng-controller="indexCtrl" ng-init="event.init('@Url.Action("GetCategorys")')">
         <button ng-click="event.getCategorys();">getCategorys</button>
         <table class="table table-bordered">
             <tr><th>categoryId</th><th>categoryName</th></tr>
