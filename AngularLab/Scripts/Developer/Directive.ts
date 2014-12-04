@@ -90,7 +90,7 @@ angular.module("wrapApp", [])
             template: "<div class='kim' ng-transclude></div>",
             //以下為此主題的第二範例
             scope: {},//重新定scope
-            link: function (scope, element) {
+            link: function (scope:any, element) {
                 scope.name = "Kim 2";//不會顯示Kim 2因為上一行已重新定了scope
             }
         };

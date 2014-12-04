@@ -1,0 +1,22 @@
+﻿<div ng-app="crudApp">
+    <div ng-controller="indexCtrl" ng-init="event.init('Kim')">
+        <button ng-click="event.getCategorys();">getCategorys</button>
+        <table class="table table-bordered">
+            <tr><th>categoryId</th><th>categoryName</th></tr>
+            <tr ng-repeat="category in categorys">
+                <td>{{category.CategoryId}}</td>
+                <th>{{category.CategoryName}}</th>
+            </tr>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/app/model/categoryModel.js"></script>
+    <script src="~/app/model/productModel.js"></script>
+    <script src="~/app/service/indexService.js"></script>
+    <script src="~/app/controller/indexController.js"></script>
+    <script src="~/app/app/curdApp.js"></script>
+    <script>
+
+    </script>
+}
