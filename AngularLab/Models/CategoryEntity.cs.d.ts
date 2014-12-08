@@ -1,6 +1,6 @@
 ﻿declare module server {
 	interface CategoryEntity {
-		categoryId: number;
-		categoryName: string;
+		CategoryId: number;
+		CategoryName: string;
 	}
 }

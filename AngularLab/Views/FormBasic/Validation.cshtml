@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Validation";
+}
+<style>
+    .has-error {
+        color: red;
+    }
+    /*ngMessage ng-active*/
+    .error-messages.ng-active,ng-active:after {
+        background: maroon;
+        color: white;
+        padding: 2px;
+        border-radius: 5px;
+        margin-top: 15px;
+        position: relative;
+    }
+
+        .error-messages.ng-active:after {
+            position: absolute;
+            top: -10px;
+            content: "";
+            left: 20px;
+            border-style: solid;
+            border-color: transparent transparent maroon;
+            border-width: 5px;
+        }
+</style>
+<h2>Validation</h2>
+<a href="http://blog.darkthread.net/post-2014-10-12-angular-notes-19-validation.aspx">reference</a>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <form name="myForm" novalidate="novalidate">
+            <label class="control-label">Name:</label>
+            <input type="text" name="name" ng-model="model.name" required class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.name.$touched">
+                <p class="has-error" ng-show="myForm.name.$error.required">name cannot empty</p>
+            </div>
+            <p></p>
+            <label class="control-label">Email:</label>
+            <input type="email" name="email" ng-model="model.email" required class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.email.$touched">
+                <p class="has-error" ng-show="myForm.email.$error.required">email cannot empty</p>
+                <p class="has-error" ng-show="myForm.email.$error.email">email format is incorrect</p>
+            </div>
+            <p></p>
+            <label class="control-label">Code:</label>
+            <input type="text" name="code" ng-model="model.code" required ng-pattern="model.codePattern"
+                   class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.code.$touched">
+                <p class="has-error" ng-show="myForm.code.$error.required">code cannot empty</p>
+                <p class="has-error" ng-show="myForm.code.$error.pattern">需為0-9, A-Z,a-z</p>
+            </div>
+            <p></p>
+            <h3>Use ngMessage after 1.3.x</h3>
+            <input type="text" ng-model="mode.field" name="myField" required minlength="5" class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.myField.$touched" ng-messages="myForm.myField.$error" class="error-messages">
+                <div ng-message="required">You did not enter a field</div>
+                <div ng-message="minlength">The value entered is too short</div>
+            </div>
+            <p></p>
+            <button type="submit" class="btn btn-default">Send</button>
+
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", ["ngMessages"]);
+        var myCtrl = myApp.controller("myCtrl", function ($scope) {
+
+            function myViewModel() {
+                var self = this;
+                self.name = "1";
+                self.email = "";
+                self.code = "code";
+                self.codePattern = new RegExp("^[0-9a-zA-Z]*$");
+            }
+            $scope.model = new myViewModel();
+        });
+    </script>
+
+}

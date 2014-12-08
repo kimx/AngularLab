@@ -10,4 +10,4 @@ module scModules.app {
         }
     }
 }
-var crudApp = new scModules.app.crudApp();
+

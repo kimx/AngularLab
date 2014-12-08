@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Resource";
+}
+
+<h2>Resource</h2>
+<style>
+    /*ngMessage ng-active*/
+    .error-messages.ng-active, ng-active:after {
+        background: maroon;
+        color: white;
+        padding: 2px;
+        border-radius: 5px;
+        margin-top: 15px;
+        position: relative;
+    }
+
+        .error-messages.ng-active:after {
+            position: absolute;
+            top: -10px;
+            content: "";
+            left: 20px;
+            border-style: solid;
+            border-color: transparent transparent maroon;
+            border-width: 5px;
+        }
+</style>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <form name="myForm" novalidate="novalidate">
+            <label class="control-label">CategoryId:</label>
+            <input type="text" ng-model="model.category.CategoryId" name="CategoryId" required class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.CategoryId.$touched" ng-messages="myForm.CategoryId.$error" class="error-messages">
+                <div ng-message="required">You did not enter a CategoryId</div>
+            </div>
+            <p></p>
+            <label class="control-label">CategoryName:</label>
+            <input type="text" ng-model="model.category.CategoryName" name="CategoryName" required class="form-control" />
+            <div ng-show="myForm.$submitted || myForm.CategoryName.$touched" ng-messages="myForm.CategoryName.$error"
+                 class="error-messages">
+                <div ng-message="required">You did not enter a CategoryName</div>
+            </div>
+            <p></p>
+            <button  ng-show="!model.isEdit" type="submit" class="btn btn-default" ng-click="model.add();">Add</button>
+            <button ng-show="model.isEdit" type="submit" class="btn btn-primary" ng-click="model.save();">Save</button>
+        </form>
+        <p></p>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th width="80px"></th>
+                <th>CategoryId</th>
+                <th>CategoryName</th>
+            </tr>
+            <tr ng-repeat="c in model.categorys">
+                <td>
+                    <button class="btn btn-xs btn-info" ng-click="model.delete(c);"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button class="btn btn-xs btn-info" ng-click="model.edit(c);"><span class="glyphicon glyphicon-edit"></span></button>
+                </td>
+                <td>{{c.CategoryId}}</td>
+                <td>{{c.CategoryName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", ["ngResource", "ngMessages"]);
+        myApp.service("categoryService", CategoryService);
+        var myCtrl = myApp.controller("myCtrl", function ($scope, categoryService) {
+
+            function myViewModel() {
+                var self = this;
+                self.categorys = [];
+                self.category = {};
+                
+                self.isEdit = false;
+                self.query = function () {
+                    categoryService.query(function (categorys) {
+                        self.categorys = categorys;
+                    })
+                }
+
+                self.add = function () {
+                    categoryService.create(self.category, function () {
+                        self.query();
+                    });
+                }
+
+                self.edit = function (c) {
+                    self.category = c;
+                    self.isEdit = true;
+                }
+
+                self.save = function () {
+                    categoryService.update(self.category, function () {
+                        self.query();
+                    })
+                    self.isEdit = false;
+                }
+
+                self.delete = function (c) {
+                    categoryService.delete({ id: c.CategoryId }, function () {
+                        self.query();
+                      
+                    });
+                }
+
+                self.query();
+            }
+            $scope.model = new myViewModel();
+        });
+
+        function CategoryService($resource) {
+            var self = this;
+            var category = $resource("/api/category/:Id"
+                , { Id: "@@CategoryId" }
+                , { "update": { method: "PUT" } });
+            self.query = category.query;
+            self.create = category.save;
+            self.update = category.update;
+            self.delete = category.delete;
+        }
+    </script>
+}

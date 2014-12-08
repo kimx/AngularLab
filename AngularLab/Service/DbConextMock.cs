@@ -37,6 +37,10 @@ namespace AngularLab.Service
             categoryList.Add(new CategoryEntity { CategoryId = 1, CategoryName = "Apple" });
             categoryList.Add(new CategoryEntity { CategoryId = 2, CategoryName = "HTC" });
             categoryList.Add(new CategoryEntity { CategoryId = 3, CategoryName = "Nokia" });
+            for (int i = 4; i < 10; i++)
+            {
+                categoryList.Add(new CategoryEntity { CategoryId = i, CategoryName = "Apple-" + i });
+            }
             Category = categoryList.AsQueryable();
         }
     }

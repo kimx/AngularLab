@@ -11,12 +11,14 @@
     </div>
 </div>
 @section scripts{
+    <script src="~/app/app/curdApp.js"></script>
+    <script src="~/app/controller/crud/indexController.js"></script>
+    <script src="~/app/service/indexService.js"></script>
     <script src="~/app/model/categoryModel.js"></script>
     <script src="~/app/model/productModel.js"></script>
-    <script src="~/app/service/indexService.js"></script>
-    <script src="~/app/controller/crud/indexController.js"></script>
-    <script src="~/app/app/curdApp.js"></script>
-    <script>
 
+
+    <script>
+        var crudApp = new scModules.app.crudApp();
     </script>
 }
