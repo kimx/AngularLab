@@ -1063,6 +1063,7 @@
     <Content Include="Views\Crud\Index.cshtml" />
     <Content Include="Views\FormBasic\Validation.cshtml" />
     <Content Include="Views\HttpBasic\Resource.cshtml" />
+    <Content Include="Views\FormBasic\DropdownList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

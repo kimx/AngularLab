@@ -13,5 +13,10 @@ namespace AngularLab.Controllers
         {
             return View();
         }
+
+        public ActionResult DropdownList()
+        {
+            return View();
+        }
     }
 }

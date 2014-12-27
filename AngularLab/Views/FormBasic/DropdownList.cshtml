@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "DropdownList";
+}
+
+@*http://www.undefinednull.com/2014/08/11/a-brief-walk-through-of-the-ng-options-in-angularjs/*@
+<div ng-app="myApp">
+    <div class="col-sm-6" ng-controller="myCtrl">
+        <h4>透過Value設定預設值</h4>
+        <select ng-model="model.selectedCategory" ng-options="item.value as item.name for item in model.categoryNames" class="form-control"></select>
+        <p>selected item is : {{model.selectedCategory}}</p>
+    </div>
+    <div class="col-sm-6" ng-controller="myCtrl">
+        <h4>透過Value設定預設值-Group by</h4>
+        <select ng-model="model.selectedCategory" ng-options="item.value as item.name group by item.level for item in model.categoryNames" class="form-control"></select>
+        <span>selected item is : {{model.selectedCategory}}</span>
+    </div>
+
+    <div ng-controller="myListCtrl">
+        <h4>多筆列表透過Value設定預設值</h4>
+        <table class="table table-bordered">
+            <tr><th>ProductName</th><th>Category</th><th></th></tr>
+
+            <tr ng-repeat="d in model.data">
+                <td>{{d.productName}}</td>
+                <td>
+                    <select ng-model="d.selectedCategory" ng-options="item.value as item.name for item in model.categoryNames" class="form-control"></select>
+
+
+                </td>
+                <td>  {{d.selectedCategory}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <div class="col-sm-12" ng-controller="myDirCtrl">
+        <h4>Directive-my-select</h4>
+        <my-select ng-model="model.selectedCategory" my-click="alertMessage()"></my-select>
+        <h4>selectedCategory:{{model.selectedCategory}}</h4>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        var myCtrl = myApp.controller("myCtrl", function ($scope) {
+            function myViewModel() {
+                var self = this;
+                self.selectedCategory = 2;
+                self.categoryNames = [{ name: "Apple", value: 1, level: 1 }, { name: "Nokia", value: 2, level: 1 }, { name: "HTC", value: 3, level: 2 }];
+            }
+            $scope.model = new myViewModel();
+        });
+
+        var myListCtrl = myApp.controller("myListCtrl", function ($scope) {
+            function myViewModel() {
+                var self = this;
+                self.categoryNames = [{ name: "Apple", value: 1 }, { name: "Nokia", value: 2 }, { name: "HTC", value: 3 }];
+                self.data = [{ productName: "iPhone4", selectedCategory: 1 }
+                           , { productName: "iPhone5", selectedCategory: 1 }
+                           , { productName: "Nokia990", selectedCategory: 2 }
+                           , { productName: "Nokia500", selectedCategory: 2 }
+                           , { productName: "Desire", selectedCategory: 3 }
+                           , { productName: "Hitcon", selectedCategory: 3 }
+                ];
+            }
+            $scope.model = new myViewModel();
+        });
+    </script>
+
+    <script>
+        var myCtrl = myApp.controller("myDirCtrl", function ($scope) {
+            function myViewModel() {
+                var self = this;
+                self.selectedCategory = 2;
+            }
+            $scope.model = new myViewModel();
+            $scope.alertMessage = function () {
+                alert('k');
+            };
+        });
+        //https://weblogs.asp.net/dwahlin/creating-custom-angularjs-directives-part-2-isolate-scope
+        //http://blog.johnsonlu.org/angularjs-directive/
+        /*
+        scope:false-->直接使用原scope的值
+        scope:true-->建立一個新的scope並繼承父層的值
+        scope:物件-->會隔離的scope
+        @@單向 來源屬性需用{{value}}大括號
+        =雙向 
+        &方法繫結
+        左方為值右方為繫結的attr ps:attr命名遇到-要變大寫，例:ng-model=ngNodel
+        */
+        myApp.directive("mySelect", function () {
+            return {
+                template: "<button ng-click='click()'>{{mySelected}}</button><select ng-model='mySelected' ng-options='item.value as item.name for item in categoryNames' class='form-control'></select>",
+               // template: "<h3 >mySelected:{{ngModel}}</h3>",
+                restrict: "E"
+                ,scope: {
+                    mySelected: "=ngModel"
+                    ,click:"&myClick"
+                }//ngModel=外層的ng-model=""的值,
+                , link: function (scope, element, controllers) {
+                    scope.categoryNames = [{ name: "Apple", value: 1 }, { name: "Nokia", value: 2 }, { name: "HTC", value: 3 }];
+                },
+             
+            }
+        });
+
+
+    </script>
+}

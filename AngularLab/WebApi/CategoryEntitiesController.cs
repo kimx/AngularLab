@@ -62,8 +62,8 @@ namespace AngularLab.WebApi
                 return BadRequest(ex.Message);
             }
 
-            // return Ok<CategoryEntity>(categoryEntity);
-            return StatusCode(HttpStatusCode.NotImplemented);
+             return Ok<CategoryEntity>(db.Category.Single(o=>o.CategoryId==key));
+            //return StatusCode(HttpStatusCode.NotImplemented);
         }
 
         // PUT: odata/CategoryEntities(5)
