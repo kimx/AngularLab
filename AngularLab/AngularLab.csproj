@@ -1023,6 +1023,7 @@
     <Compile Include="Controllers\FormBasicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpBasicController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TutorialController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1064,6 +1065,7 @@
     <Content Include="Views\FormBasic\Validation.cshtml" />
     <Content Include="Views\HttpBasic\Resource.cshtml" />
     <Content Include="Views\FormBasic\DropdownList.cshtml" />
+    <Content Include="Views\Service\Provider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

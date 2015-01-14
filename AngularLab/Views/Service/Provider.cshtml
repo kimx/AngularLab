@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Provider";
+}
+
+<h2>Provider</h2>
+<div class="row" ng-app="myApp">
+    <div class="col-sm-12" ng-controller="myCtrl">
+        <button class="btn btn-primary btn-{{model.size}}">Send</button>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.provider("sizeService", function () {
+            var sizeValue;
+            return {
+                setSize: function (value) {
+                    sizeValue = value
+                },
+                $get: function () {
+                    return {
+                        size: sizeValue
+                    };
+                }
+            }
+        })
+        myApp.config(function (sizeServiceProvider) {
+            sizeServiceProvider.setSize("lg");
+        })
+
+        var myCtrl = myApp.controller("myCtrl", function ($scope, sizeService) {
+            function myViewModel() {
+                var self = this;
+                self.size = sizeService.size;
+            }
+            $scope.model = new myViewModel();
+        });
+
+
+    </script>
+}
