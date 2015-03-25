@@ -1009,11 +1009,17 @@
     <Content Include="Views\Tutorial\RoutingMultipleTabMain.cshtml" />
     <Content Include="Views\Tutorial\Templates.cshtml" />
     <Content Include="Views\Tutorial\TemplatingLinksImages.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Xeditable\angular-xeditable\css\xeditable.css" />
+    <Content Include="Views\Xeditable\angular-xeditable\js\xeditable.js" />
+    <Content Include="Views\Xeditable\angular-xeditable\js\xeditable.min.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AngularJsHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1025,6 +1031,7 @@
     <Compile Include="Controllers\HttpBasicController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TutorialController.cs" />
+    <Compile Include="Controllers\XeditableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1066,6 +1073,9 @@
     <Content Include="Views\HttpBasic\Resource.cshtml" />
     <Content Include="Views\FormBasic\DropdownList.cshtml" />
     <Content Include="Views\Service\Provider.cshtml" />
+    <Content Include="Views\Xeditable\Index.cshtml" />
+    <Content Include="Views\Xeditable\DIYIndex.cshtml" />
+    <Content Include="Views\Xeditable\DIYIndex2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
