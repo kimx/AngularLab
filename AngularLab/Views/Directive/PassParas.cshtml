@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Pass Paras";
+}
+
+<h2>Pass Paras</h2>
+<div ng-app="app" ng-controller="Ctrl">
+    <ng-planner lessons="plannerLessons" lesson-clicked="editLesson(lesson)" ></ng-planner>
+    {{lesson}}
+
+</div>
+
+
+@section scripts{
+    <script>
+        var app = angular.module("app", ["ngMessages"]);
+
+        app.directive('ngPlanner', function () {
+            return {
+                restrict: 'EA',
+                template: '<button ng-click="onlessonClicked()">Send</button>',
+                scope: {
+                   
+                    onlessonClicked: "&lessonClicked",
+                },
+                replace: true,
+                link: function (scope, elem, attr) {
+                    var selectedIndex = null;
+
+                    console.log(scope);
+                    console.log(scope.lessons);
+                    scope.test = function (tester) {
+                        selectedIndex = tester;
+                        console.log("Directive: " + selectedIndex);
+                        scope.lessonClicked({ lesson: selectedIndex });
+                    }
+                }
+            }
+        });
+
+        /* Used for handling business details, planner, etc */
+        app.controller("Ctrl", function ($scope) {
+            $scope.lesson = "1";
+
+            //Fired when the new lesson button is clicked in the planner directive
+            $scope.newLesson = function (date) {
+                console.log("New Lesson Clicked: " + date);
+            }
+
+            //Fired when a lesson is clicked on
+            $scope.editLesson = function (lesson) {
+                console.log("Lesson Clicked: " + lesson);
+            }
+        });
+    </script>
+
+}

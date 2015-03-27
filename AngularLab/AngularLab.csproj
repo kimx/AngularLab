@@ -1028,12 +1028,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CrudController.cs" />
     <Compile Include="Controllers\DeveloperController.cs" />
+    <Compile Include="Controllers\DirectiveController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\FormBasicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpBasicController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TutorialController.cs" />
-    <Compile Include="Controllers\XeditableController.cs" />
+    <Compile Include="Controllers\XeditableController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1079,6 +1084,7 @@
     <Content Include="Views\Xeditable\DIYIndex.cshtml" />
     <Content Include="Views\Xeditable\DIYIndex2.cshtml" />
     <Content Include="Views\Xeditable\DIYNgTable.cshtml" />
+    <Content Include="Views\Directive\PassParas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
