@@ -1,0 +1,105 @@
+@{
+    ViewBag.Title = "ViewDataTable";
+}
+
+<h2>ViewDataTable</h2>
+<style>
+    /*ngMessage ng-active*/
+.error-messages.ng-active, ng-active:after {
+    background: maroon;
+    color: white;
+    padding:1px 1px 1px 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+
+    .error-messages.ng-active:after {
+        position: absolute;
+        top: -10px;
+        content: "";
+        left: 20px;
+        border-style: solid;
+        border-color: transparent transparent maroon;
+        border-width: 5px;
+    }
+</style>
+<div ng-app="app" ng-controller="Ctrl">
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <tr>
+            <td></td>
+            <td style="width:20%">Name</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="user in users" ng-form="rowform">
+            <td>{{rowform.$invalid}}</td>
+            <td>
+                <input sc-editable="$index==editIndex"
+                       sc-view-class="pull-right"
+                       class="form-control" id="name" name="name{{$index}}" ng-model="user.name" type="text" required />
+                <div class="error-messages" ng-messages="rowform['name{{$index}}'].$error"
+                     ng-show="rowform.$submitted || rowform['name{{$index}}'].$touched">
+                    <div ng-message="required">required</div>
+                </div>
+
+            </td>
+            <td>
+                <button type="button" ng-disabled="$index==editIndex" ng-click="edit($index);" class=" btn btn-primary">
+                    Edit
+                </button>
+                <button type="submit" ng-disabled="$index!=editIndex" ng-click="save($index);" class=" btn btn-primary">
+                    Save
+                </button>
+
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+
+
+@section scripts{
+    <script>
+        var app = angular.module("app", ['ngMessages']);
+
+        app.controller('Ctrl', function ($scope, $filter, $http) {
+            $scope.users = [{ name: 'Jobs' }, { name: 'Bill' }, { name: 'Mark' }];
+            $scope.editIndex = -1;
+            $scope.edit = function (index) {
+                $scope.editIndex = index;
+            }
+
+            $scope.save = function (index) {
+                $scope.editIndex = -1;
+            }
+
+        });
+
+        app.directive('scEditable', function () {
+            return {
+                require: 'ngModel',
+                link: function ($scope, elm, attrs, ctrl) {
+                    $scope.$watch(attrs.scEditable, function (editable) {
+                        if (editable) {//可以編輯:
+                            $(elm).next("div[sg-view]").remove();//將唯讀資料移除
+                            $(elm).show();//顯示原本的表單元件
+                            $(elm).next("[ng-messages]").show();
+                        }
+                        else {
+                            var ngModelValue = $scope.$eval(attrs.ngModel)//將繫結轉成值
+                            var content = $("<div sg-view/>").html(ngModelValue);
+                            content.addClass(attrs.scViewClass);//唯讀資料的css
+                            $(elm).parent().append(content);//將唯讀資料加入
+                            $(elm).next("[ng-messages]").hide();
+                            $(elm).hide();//隱藏原本的表單元件
+                        }
+                    });
+                }
+            };
+        });
+
+
+    </script>
+
+}

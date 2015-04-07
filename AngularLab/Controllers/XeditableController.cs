@@ -28,5 +28,10 @@ namespace AngularLab.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewDataTable()
+        {
+            return View();
+        }
     }
 }

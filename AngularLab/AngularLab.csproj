@@ -1017,6 +1017,7 @@
     <Content Include="Views\Xeditable\angular-xeditable\js\xeditable.min.js" />
     <Content Include="Views\Xeditable\ng-table\ng-table.css" />
     <Content Include="Views\Xeditable\ng-table\ng-table.js" />
+    <Content Include="Views\Xeditable\ViewDataTable-inputdir.txt" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1085,6 +1086,8 @@
     <Content Include="Views\Xeditable\DIYIndex2.cshtml" />
     <Content Include="Views\Xeditable\DIYNgTable.cshtml" />
     <Content Include="Views\Directive\PassParas.cshtml" />
+    <Content Include="Views\Xeditable\ViewDataTable.cshtml" />
+    <Content Include="Views\Directive\AsyncValidator.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

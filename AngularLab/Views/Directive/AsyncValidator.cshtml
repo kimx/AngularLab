@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "AsyncValidator";
+}
+<style>
+    /*ngMessage ng-active*/
+    .error-messages.ng-active, ng-active:after {
+        background: maroon;
+        color: white;
+        padding: 2px;
+        border-radius: 5px;
+        margin-top: 15px;
+        position: relative;
+    }
+
+        .error-messages.ng-active:after {
+            position: absolute;
+            top: -10px;
+            content: "";
+            left: 20px;
+            border-style: solid;
+            border-color: transparent transparent maroon;
+            border-width: 5px;
+        }
+</style>
+<h2>DIY</h2>
+<div ng-app="app" ng-controller="Ctrl">
+    <form name="editForm">
+
+        <input type="text" name="email"
+               class="form-control"
+               ng-model="email"
+               ng-model-options="{ updateOn: 'blur' }"
+               wc-unique
+               wc-callback="myCallback"
+               wc-custom="myCustom"
+               @*data-wc-unique-key="{{customer.id}}"
+           data-wc-unique-property="email"*@
+               required />
+
+        <!-- Show error if touched and unique is in error -->
+
+        <div class="error-messages" ng-messages="editForm['email'].$error"
+             ng-show="editForm.$submitted || editForm['email'].$touched">
+            <div ng-message="unique">
+                Email already in use
+            </div>
+            <div ng-message="custom">
+                custom invalid
+            </div>
+        </div>
+        <h3>{{name}}</h3>
+
+
+        <input type="text" name="name"
+               class="form-control"
+               ng-model="name"
+               ng-model-options="{ updateOn: 'blur' }"
+               wc-custom="myCustom"
+               @*data-wc-unique-key="{{customer.id}}"
+           data-wc-unique-property="email"*@
+               required />
+
+        <div class="error-messages" ng-messages="editForm['name'].$error"
+             ng-show="editForm.$submitted || editForm['name'].$touched">
+            <div ng-message="unique">
+                Email already in use
+            </div>
+            <div ng-message="custom">
+                custom invalid
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section scripts{
+    <script>
+        var app = angular.module("app", ["ngMessages"]);
+
+        app.controller('Ctrl', function ($scope, $http) {
+            $scope.email = "kimaa";
+            $scope.myCallback = function (data) {
+                $scope.name = data.name;
+
+            }
+            $scope.myCustom = function (value) {
+                return value == "kim2";
+            }
+        });
+
+        var wcUniqueDirective = function ($q, $parse, $http) {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var target = scope.$eval(attrs.wcCallback);
+                    ngModel.$asyncValidators.unique = function (modelValue, viewValue) {
+                        var deferred = $q.defer(),
+                            currentValue = modelValue || viewValue;
+                        // key = attrs.wcUniqueKey,
+                        //property = attrs.wcUniqueProperty;
+
+                        //First time the asyncValidators function is loaded the
+                        //key won't be set  so ensure that we have
+                        //key and propertyName before checking with the server
+                        //if (key && property) {}
+                        $http.get('/Directive/CheckUniqueValue', { params: { value: currentValue } })
+                        .then(function (unique) {
+                            if (unique.data.result) {
+                                deferred.resolve(); //It's unique
+                                target(unique.data);
+                            }
+                            else {
+                                deferred.reject(); //Add unique to $errors
+                            }
+                        });
+
+                        //else {
+                        //    deferred.resolve(); //Ensure promise is resolved if we hit this
+                        //}
+
+                        return deferred.promise;
+                    };
+                }
+            };
+        };
+        app.directive('wcUnique', wcUniqueDirective);
+
+        var customDirective = function ($q, $parse, $http) {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var target = scope.$eval(attrs.wcCustom);
+                    ngModel.$validators.custom = function (modelValue, viewValue) {
+                        var currentValue = modelValue || viewValue;
+                        if (target(currentValue))
+                            return true;
+                        return false;
+                    };
+                }
+            };
+        };
+        app.directive('wcCustom', customDirective);
+    </script>
+}

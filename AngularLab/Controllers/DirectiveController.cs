@@ -13,5 +13,15 @@ namespace AngularLab.Controllers
         {
             return View();
         }
+
+        public ActionResult AsyncValidator()
+        {
+            return View();
+        }
+
+        public ActionResult CheckUniqueValue(string value)
+        {
+            return Json(new { result = value == "kim", name = "Name-" + DateTime.Now }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
