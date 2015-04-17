@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/Gridmvc.css" rel="stylesheet" />
+
+<div class="col-md-12 col" id="gridContainer" ng-app="myApp" ng-controller="myCtrl as vm">
+    <button class="btn btn-default" ng-click="vm.query();">Query</button>
+    <div class="grid-mvc" data-lang="zh-TW" data-gridname="productAdvanceGrid" data-selectable="false" data-multiplefilters="true">
+        <div class="grid-wrap">
+            <table class="table table-striped table-hover grid-table" data-fixed-header="True">
+                <thead>
+                    <tr>
+                        <th class="grid-header"><div class="grid-header-title"><span></span></div></th>
+                        <th class="grid-header">
+                            <div class="grid-filter" data-filterdata="[]" data-name="CategoryName"
+                                 data-type="System.String" data-widgetdata="null">
+                                <span class="grid-filter-btn" title="過濾此欄位"></span>
+                                <div class="dropdown dropdown-menu grid-dropdown opened" style="display: none;">
+                                    <div class="grid-dropdown-arrow"></div>
+                                    <div class="grid-dropdown-inner">
+                                        <div class="grid-popup-widget">
+                                            <div class="form-group">
+                                                <label>Type: </label>
+                                                <select class="grid-filter-type form-control">
+                                                    <option value="2" selected="selected">Contains</option>
+                                                    <option value="3">StartsWith</option>
+                                                    <option value="4">EndsWith</option>
+                                                    <option value="1">Equals</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Value:</label>
+                                                <input type="text" class="grid-filter-input form-control" value="">
+
+
+                                            </div>
+                                            <div class="grid-filter-buttons">
+                                                <button type="button" class="btn btn-primary grid-apply">Apply</button>
+                                            </div>
+                                        </div>
+                                        <div class="grid-popup-additional"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-header-title"><a href="?grid-column=CategoryName&amp;grid-dir=0">分類名稱</a></div>
+                        </th>
+                        <th class="grid-header"><div class="grid-filter" data-filterdata="[]" data-name="ProductName" data-type="System.String" data-widgetdata="null"><span class="grid-filter-btn" title="過濾此欄位"></span></div><div class="grid-header-title"><a href="?grid-column=ProductName&amp;grid-dir=0">產品名稱</a></div></th>
+                        <th class="grid-header"><div class="grid-filter" data-filterdata="[]" data-name="Price" data-type="System.Double" data-widgetdata="null"><span class="grid-filter-btn" title="過濾此欄位"></span></div><div class="grid-header-title"><a href="?grid-column=Price&amp;grid-dir=0">Price-中文</a></div></th>
+                        <th class="grid-header"><div class="grid-filter" data-filterdata="[]" data-name="Qty" data-type="System.Int32" data-widgetdata="null"><span class="grid-filter-btn" title="過濾此欄位"></span></div><div class="grid-header-title"><a href="?grid-column=Qty&amp;grid-dir=0">Qty</a></div></th>
+                        <th class="grid-header"><div class="grid-filter" data-filterdata="[]" data-name="CreateDate" data-type="System.DateTime" data-widgetdata="null"><span class="grid-filter-btn" title="過濾此欄位"></span></div><div class="grid-header-title"><a href="?grid-column=CreateDate&amp;grid-dir=0">CreateDate</a></div></th>
+                        <th class="grid-header"><div class="grid-filter" data-filterdata="[]" data-name="OnSaled" data-type="System.Boolean" data-widgetdata="null"><span class="grid-filter-btn" title="過濾此欄位"></span></div><div class="grid-header-title"><a href="?grid-column=OnSaled&amp;grid-dir=0">OnSaled</a></div></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr class="grid-row" ng-repeat="item in vm.products">
+                        <td class="grid-cell" data-name="">
+                            <button type="button" class="btn btn-danger" onclick="RegisterDelete('/Tutorial/DataGridAdvance/AdvanceDelete?productId=1');">Delete</button>
+                        </td>
+                        <td class="grid-cell" data-name="CategoryId">{{item.CategoryId}}</td>
+                        <td class="grid-cell" data-name="ProductName">{{item.ProductName}}</td>
+                        <td class="grid-cell text-right" data-name="Price">{{item.Price}}</td>
+                        <td class="grid-cell text-right" data-name="Qty">{{item.Qty}}</td>
+                        <td class="grid-cell" data-name="CreateDate">{{item.CreateDate}}</td>
+                        <td class="grid-cell" data-name="OnSaled">{{item.OnSaled}}</td>
+                    </tr>
+              
+
+                </tbody>
+            </table>
+            <div class="grid-footer">
+                <div class="col-xs-11">
+
+                    <div class="grid-footer">
+                        <div class="grid-pager">
+                            <ul class="pagination">
+                                <li><a href="#" class="grid-prev-page" title="Previous Page" style="display: none"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+                                <li class="active"><a class="grid-page-link" data-page="1">1</a></li>
+                                <li><a href="#" class="grid-page-link" data-page='2'>2</a></li>
+                                <li><a href="#" class="grid-page-link" data-page='3'>3</a></li>
+                                <li><a href="#" class="grid-page-link" data-page='4'>4</a></li>
+                                <li><a href="#" class="grid-page-link" data-page='5'>5</a></li>
+
+                                <li><a href="#" title="Next Page" class="grid-next-page"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-1 pagination text-right">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", ["ngResource", "ngMessages"]);
+        myApp.service("ProductService", ProductService);
+        var myCtrl = myApp.controller("myCtrl", function ($scope, ProductService) {
+            var self = this;
+            self.products = [];
+
+            self.query = function () {
+                ProductService.query(function (response) {
+                    self.products = response.data;
+                })
+
+            }
+        });
+
+        function ProductService($http) {
+            var self = this;
+
+            self.query = function (callback) {
+                $http.get("/GridLab/QueryProducts").success(function (response) {
+                    callback(response);
+                })
+            }
+
+        }
+    </script>
+}
