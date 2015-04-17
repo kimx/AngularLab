@@ -32,7 +32,7 @@
                ng-model-options="{ updateOn: 'blur' }"
                wc-unique
                wc-callback="myCallback"
-               wc-custom="myCustom"
+             
                @*data-wc-unique-key="{{customer.id}}"
            data-wc-unique-property="email"*@
                required />
@@ -88,11 +88,11 @@
             }
         });
 
-        var wcUniqueDirective = function ($q, $parse, $http) {
+        var wcUniqueDirective = function ($q, $http) {
             return {
                 restrict: 'A',
                 require: 'ngModel',
-                link: function (scope, element, attrs, ngModel) {
+                link: function (scope, el, attrs, ngModel) {
                     var target = scope.$eval(attrs.wcCallback);
                     ngModel.$asyncValidators.unique = function (modelValue, viewValue) {
                         var deferred = $q.defer(),
@@ -105,7 +105,7 @@
                         //key and propertyName before checking with the server
                         //if (key && property) {}
                         $http.get('/Directive/CheckUniqueValue', { params: { value: currentValue } })
-                        .then(function (unique) {
+                        .SU(function (unique) {
                             if (unique.data.result) {
                                 deferred.resolve(); //It's unique
                                 target(unique.data);
