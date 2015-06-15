@@ -18,5 +18,10 @@ namespace AngularLab.Controllers
         {
             return View();
         }
+
+        public ActionResult DatePicker()
+        {
+            return View();
+        }
     }
 }

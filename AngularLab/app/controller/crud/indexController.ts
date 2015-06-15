@@ -2,6 +2,8 @@
     export class indexController {
         constructor(private $scope: scope.indexScope, private indexService: service.indexService) {
             $scope.event = this;
+            var scope: any = $scope;
+            
         }
 
         init(url) {

@@ -34,6 +34,14 @@ $provide.value("$locale", {
       "divendres",
       "dissabte"
     ],
+    "ERANAMES": [
+      "abans de Crist",
+      "despr\u00e9s de Crist"
+    ],
+    "ERAS": [
+      "aC",
+      "dC"
+    ],
     "MONTH": [
       "gener",
       "febrer",
@@ -109,7 +117,7 @@ $provide.value("$locale", {
       }
     ]
   },
-  "id": "ca",
+  "id": "ca-ad",
   "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

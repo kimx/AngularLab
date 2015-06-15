@@ -22,63 +22,71 @@ function getVF(n, opt_precision) {
 $provide.value("$locale", {
   "DATETIME_FORMATS": {
     "AMPMS": [
-      "a.m.",
-      "p.m."
+      "a. m.",
+      "p. m."
     ],
     "DAY": [
-      "domingo",
-      "luns",
-      "martes",
-      "m\u00e9rcores",
-      "xoves",
-      "venres",
-      "s\u00e1bado"
+      "diumenge",
+      "dilluns",
+      "dimarts",
+      "dimecres",
+      "dijous",
+      "divendres",
+      "dissabte"
+    ],
+    "ERANAMES": [
+      "abans de Crist",
+      "despr\u00e9s de Crist"
+    ],
+    "ERAS": [
+      "aC",
+      "dC"
     ],
     "MONTH": [
-      "xaneiro",
-      "febreiro",
-      "marzo",
+      "gener",
+      "febrer",
+      "mar\u00e7",
       "abril",
-      "maio",
-      "xu\u00f1o",
-      "xullo",
-      "agosto",
-      "setembro",
-      "outubro",
-      "novembro",
-      "decembro"
+      "maig",
+      "juny",
+      "juliol",
+      "agost",
+      "setembre",
+      "octubre",
+      "novembre",
+      "desembre"
     ],
     "SHORTDAY": [
-      "dom",
-      "lun",
-      "mar",
-      "m\u00e9r",
-      "xov",
-      "ven",
-      "s\u00e1b"
+      "dg.",
+      "dl.",
+      "dt.",
+      "dc.",
+      "dj.",
+      "dv.",
+      "ds."
     ],
     "SHORTMONTH": [
-      "xan",
-      "feb",
-      "mar",
-      "abr",
-      "mai",
-      "xu\u00f1",
-      "xul",
-      "ago",
-      "set",
-      "out",
-      "nov",
-      "dec"
+      "gen.",
+      "febr.",
+      "mar\u00e7",
+      "abr.",
+      "maig",
+      "juny",
+      "jul.",
+      "ag.",
+      "set.",
+      "oct.",
+      "nov.",
+      "des."
     ],
-    "fullDate": "EEEE dd MMMM y",
-    "longDate": "dd MMMM y",
-    "medium": "d MMM, y HH:mm:ss",
-    "mediumDate": "d MMM, y",
-    "mediumTime": "HH:mm:ss",
-    "short": "dd/MM/yy HH:mm",
-    "shortDate": "dd/MM/yy",
-    "shortTime": "HH:mm"
+    "fullDate": "EEEE, d MMMM 'de' y",
+    "longDate": "d MMMM 'de' y",
+    "medium": "d MMM y H:mm:ss",
+    "mediumDate": "d MMM y",
+    "mediumTime": "H:mm:ss",
+    "short": "d/M/yy H:mm",
+    "shortDate": "d/M/yy",
+    "shortTime": "H:mm"
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "\u20ac",
@@ -102,14 +110,14 @@ $provide.value("$locale", {
         "maxFrac": 2,
         "minFrac": 2,
         "minInt": 1,
-        "negPre": "\u00a4-",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
+        "negPre": "-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "",
+        "posSuf": "\u00a0\u00a4"
       }
     ]
   },
-  "id": "gl",
+  "id": "ca",
   "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);
