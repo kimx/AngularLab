@@ -204,7 +204,7 @@ angular.module("comuApp", [])
             scope: {
                 title2: "@title",//寫@或@attr=@title為以繫來源attribute=title,my-pane有屬性title需作轉換
             },
-            link: function (scope, element, attr, tabsCtrl) {
+            link: function (scope, element, attr, tabsCtrl:any) {
                 tabsCtrl.addPane(scope);
             },
             templateUrl: 'my-pane.html'

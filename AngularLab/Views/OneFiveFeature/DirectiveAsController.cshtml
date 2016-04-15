@@ -1,0 +1,47 @@
+﻿
+<div ng-app="myApp">
+    <div ng-view></div>
+</div>
+@section scripts{
+    <script>
+        var app = angular.module('myApp', ["ngRoute"]);
+        app.config(function ($routeProvider) {
+            $routeProvider
+            .when("/Index", { template: "<foo></foo>" })
+            .when("/Comp", { template: "<foo-comp></foo-comp>" })
+            .otherwise({ redirectTo: "/Index" })
+            ;
+        });
+
+        //Directive as Controller
+        app.directive('foo', function () {
+            return {
+                scope: {},
+                templateUrl: "/OneFiveFeature/DirectiveAsControllerMain",
+                controller: function ($scope) {
+                    $scope.foo = 'bar';
+                    this.myFoo = "123";
+                },
+                controllerAs: "vm"
+            };
+        });
+
+        //since 1.5 Compoment as Controller
+        var myComponent = {
+            bindings: {
+                foo: '=',
+                value: '@@',
+                oneWay: '<',
+                twoWay: '=',
+                callback: '&'
+            },
+            templateUrl: "/OneFiveFeature/DirectiveAsControllerMain",
+            controller: function ($scope) {
+                $scope.foo = 'myComponent';
+                this.myFoo = "myComponent";
+            },
+            controllerAs: 'vm'
+        };
+        app.component("fooComp", myComponent);
+    </script>
+}
