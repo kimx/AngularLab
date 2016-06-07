@@ -45,3 +45,4 @@ var Lab;
     }());
     Lab.myController = myController;
 })(Lab || (Lab = {}));
+//# sourceMappingURL=DirectiveAsControllerTypeScript.js.map

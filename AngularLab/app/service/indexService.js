@@ -14,3 +14,4 @@ var scModules;
         service.indexService = indexService;
     })(service = scModules.service || (scModules.service = {}));
 })(scModules || (scModules = {}));
+//# sourceMappingURL=indexService.js.map

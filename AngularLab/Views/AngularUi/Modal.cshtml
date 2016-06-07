@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Modal";
+}
+
+<h2>Modal</h2>
+
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <h3>{{Name}}</h3>
+       <button type="button" ng-click="Open();">Modal</button>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title">I'm a modal!</h3>
+            </div>
+            <div class="modal-body">
+               {{Name}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", ["ui.bootstrap"]);
+        var myCtrl = myApp.controller("myCtrl", function ($scope, $uibModal) {
+            $scope.Name = "Kim";
+            $scope.Open = function () {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'myModalContent.html',
+                    controller: function ($scope, $uibModalInstance) {
+                        $scope.Name = "Pop Kim";
+                        $scope.ok = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        }
+                        $scope.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        }
+                    },
+                    size: "lg",
+                  
+                });
+
+            }
+           
+        });
+
+   
+    </script>
+}

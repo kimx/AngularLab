@@ -10,3 +10,4 @@ var scModules;
         model.productModel = productModel;
     })(model = scModules.model || (scModules.model = {}));
 })(scModules || (scModules = {}));
+//# sourceMappingURL=productModel.js.map

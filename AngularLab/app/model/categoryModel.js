@@ -10,3 +10,4 @@ var scModules;
         model.categoryModel = categoryModel;
     })(model = scModules.model || (scModules.model = {}));
 })(scModules || (scModules = {}));
+//# sourceMappingURL=categoryModel.js.map

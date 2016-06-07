@@ -16,3 +16,4 @@ var scModules;
         app_1.crudApp = crudApp;
     })(app = scModules.app || (scModules.app = {}));
 })(scModules || (scModules = {}));
+//# sourceMappingURL=curdApp.js.map

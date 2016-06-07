@@ -23,3 +23,4 @@ var scModules;
         controller.indexController = indexController;
     })(controller = scModules.controller || (scModules.controller = {}));
 })(scModules || (scModules = {}));
+//# sourceMappingURL=indexController.js.map

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "CheckButtonList";
+}
+
+<h2>CheckButtonList</h2>
+
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <h3>{{Codes}}</h3>
+        @*Apple  <input type="checkbox" name="Kim" value="Apple"  ng-model="Codes[0]" ng-true-value="'Apple'" ng-change="print();" />
+            hTC   <input type="checkbox" name="Kim" value="hTC"     ng-model="Codes[1]" ng-true-value="'hTC'"  ng-false-value="null" />
+            Nokia <input type="checkbox" name="Kim" value="Nokia"   ng-model="Codes[2]" ng-true-value="'Nokia'" />*@
+
+        <div ng-init="Codes==null ? Codes=[]:Codes=Codes;"></div>
+        Apple  <input type="checkbox" name="Kim" value="Apple" ng-checked="Codes.indexOf('Apple')>-1" ng-click="index=Codes.indexOf('Apple');index==-1 ? Codes.push('Apple'):Codes.splice(index,1)" />
+        hTC   <input type="checkbox" name="Kim" value="hTC" ng-checked="Codes.indexOf('hTC')>-1" ng-click="index=Codes.indexOf('hTC');index==-1 ? Codes.push('hTC'):Codes.splice(index,1)" />
+        Nokia <input type="checkbox" name="Kim" value="Nokia" ng-checked="Codes.indexOf('Nokia')>-1" ng-click="index=Codes.indexOf('Nokia');index==-1 ? Codes.push('Nokia'):Codes.splice(index,1)" />
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        var myCtrl = myApp.controller("myCtrl", function ($scope) {
+            // $scope.Codes = [{ CodeNo: "Apple" }, { CodeNo: "hTC" }, { CodeNo: "Nokia" }];
+            // $scope.Codes = ["Apple", "Nokia"];
+            $scope.print = function () {
+                console.log($scope.Codes);
+            }
+
+        });
+
+    </script>
+}

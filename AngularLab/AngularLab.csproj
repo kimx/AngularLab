@@ -1045,6 +1045,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AngularUiController.cs" />
     <Compile Include="Controllers\CrudController.cs" />
     <Compile Include="Controllers\DeveloperController.cs" />
     <Compile Include="Controllers\DirectiveController.cs">
@@ -1053,6 +1054,7 @@
     <Compile Include="Controllers\FormBasicController.cs" />
     <Compile Include="Controllers\GridLabController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HtmlOptionController.cs" />
     <Compile Include="Controllers\HttpBasicController.cs" />
     <Compile Include="Controllers\OneFiveFeatureController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
@@ -1109,6 +1111,9 @@
     <Content Include="Views\OneFiveFeature\DirectiveAsController.cshtml" />
     <Content Include="Views\OneFiveFeature\DirectiveAsControllerMain.cshtml" />
     <Content Include="Views\OneFiveFeature\DirectiveAsControllerTypeScript.cshtml" />
+    <Content Include="Views\AngularUi\Modal.cshtml" />
+    <Content Include="Views\HtmlOption\RadioButtonList.cshtml" />
+    <Content Include="Views\HtmlOption\CheckButtonList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

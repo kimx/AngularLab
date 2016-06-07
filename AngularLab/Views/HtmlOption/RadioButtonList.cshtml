@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "RadioButtonList";
+}
+
+<h2>RadioButtonList</h2>
+
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <h3>{{SelectedValue}}</h3>
+        Apple  <input type="radio" name="Kim" value="Apple" ng-model="SelectedValue" />
+        hTC   <input type="radio" name="Kim" value="hTC" ng-model="SelectedValue" />
+        Nokia <input type="radio" name="Kim" value="Nokia" ng-model="SelectedValue" />
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        var myCtrl = myApp.controller("myCtrl", function ($scope) {
+            $scope.SelectedValue = "hTC";
+        });
+
+    </script>
+}

@@ -32,3 +32,4 @@ app.config(function ($stateProvider) {
     //$stateProvider.state(green);
     //$stateProvider.state(blue);
 });
+//# sourceMappingURL=StateProviderBasic.js.map
