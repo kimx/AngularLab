@@ -8,27 +8,36 @@
 <div ng-app="myApp">
     <div ng-controller="myCtrl">
         <h3>{{Codes}}</h3>
-        @*Apple  <input type="checkbox" name="Kim" value="Apple"  ng-model="Codes[0]" ng-true-value="'Apple'" ng-change="print();" />
-            hTC   <input type="checkbox" name="Kim" value="hTC"     ng-model="Codes[1]" ng-true-value="'hTC'"  ng-false-value="null" />
-            Nokia <input type="checkbox" name="Kim" value="Nokia"   ng-model="Codes[2]" ng-true-value="'Nokia'" />*@
-
-        <div ng-init="Codes==null ? Codes=[]:Codes=Codes;"></div>
-        Apple  <input type="checkbox" name="Kim" value="Apple" ng-checked="Codes.indexOf('Apple')>-1" ng-click="index=Codes.indexOf('Apple');index==-1 ? Codes.push('Apple'):Codes.splice(index,1)" />
-        hTC   <input type="checkbox" name="Kim" value="hTC" ng-checked="Codes.indexOf('hTC')>-1" ng-click="index=Codes.indexOf('hTC');index==-1 ? Codes.push('hTC'):Codes.splice(index,1)" />
-        Nokia <input type="checkbox" name="Kim" value="Nokia" ng-checked="Codes.indexOf('Nokia')>-1" ng-click="index=Codes.indexOf('Nokia');index==-1 ? Codes.push('Nokia'):Codes.splice(index,1)" />
-
+        <form autocomplete="off" class="form-horizontal ng-pristine ng-valid" id="editForm" method="POST" name="editForm" novalidate="" sc-form-event="N">
+            Apple <input  ng-model="dummy1" type="checkbox" name="Kim" value="Apple"
+                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('Apple')>-1" 
+                          ng-change="index=Codes.indexOf('Apple');index==-1 ? Codes.push('Apple'):Codes.splice(index,1);changed()" />
+            hTC   <input  ng-model="dummy2" type="checkbox" name="Kim" value="hTC"  
+                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('hTC')>-1" 
+                          ng-change="index=Codes.indexOf('hTC');index==-1 ? Codes.push('hTC'):Codes.splice(index,1);changed()" />
+            Nokia <input  ng-model="dummy3" type="checkbox" name="Kim" value="Nokia" 
+                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('Nokia')>-1" 
+                          ng-change="index=Codes.indexOf('Nokia');index==-1 ? Codes.push('Nokia'):Codes.splice(index,1);changed()" />
+          
+        </form>
+        <div ng-init="init()"></div>
     </div>
 </div>
 @section scripts{
     <script>
-        var myApp = angular.module("myApp", []);
+        var myApp = angular.module("myApp", ["ngMessages", "ui.bootstrap", "ngAnimate", "ngRoute", "ngSanitize"]);
         var myCtrl = myApp.controller("myCtrl", function ($scope) {
             // $scope.Codes = [{ CodeNo: "Apple" }, { CodeNo: "hTC" }, { CodeNo: "Nokia" }];
             // $scope.Codes = ["Apple", "Nokia"];
             $scope.print = function () {
                 console.log($scope.Codes);
             }
-
+            $scope.init = function () {
+                $scope.Codes = null;
+            }
+            $scope.changed = function () {
+                console.log($scope.Codes);
+            }
         });
 
     </script>
