@@ -4,29 +4,49 @@
 }
 
 <h2>RadioButtonList</h2>
-<style>
-    .radio-inline + .radio-inline {
-        margin-left: 5px;
-    }
-     .radio-inline:first-child {
-        margin-left: 5px;
-    }
-</style>
+@*<style>
+        .radio-inline + .radio-inline {
+            margin-left: 5px;
+        }
+
+        .radio-inline:first-child {
+            margin-left: 5px;
+        }
+    </style>*@
 <div ng-app="myApp">
     <div ng-controller="myCtrl">
         <h3>{{SelectedValue}}</h3>
         <div class="row">
-            <div class="col-sm-2 form-inline">
+            <div class="col-sm-2">
                 <div class="form-group">
-                    <label class="radio-inline">
-                        <input type="radio" name="Kim" value="Apple" ng-model="SelectedValue" />    Apple
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="Kim" value="hTC" ng-model="SelectedValue" />  hTC
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="Kim" value="Nokia" ng-model="SelectedValue" />   Nokia
-                    </label>
+                    <input type="text" ng-model="textKim" />
+                </div>
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Kim" value="Apple" ng-model="SelectedValue" />    Apple
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Kim" value="hTC" ng-model="SelectedValue" />  hTC
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Kim" value="Nokia" ng-model="SelectedValue" />   Nokia
+                        </label>
+                    </div>
+                    @* inline style
+                            <label class="radio-inline">
+                            <input type="radio" name="Kim" value="Apple" ng-model="SelectedValue" />    Apple
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Kim" value="hTC" ng-model="SelectedValue" />  hTC
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Kim" value="Nokia" ng-model="SelectedValue" />   Nokia
+                        </label>*@
                 </div>
             </div>
         </div>
