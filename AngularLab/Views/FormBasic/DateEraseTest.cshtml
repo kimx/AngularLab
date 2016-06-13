@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "DateEraseTest";
+}
+
+<h2>輸入日,月,年其中一個,按x,再輸入,再按x,無法通過驗證</h2>
+<h3>1.5.3使用mousedown解決https://github.com/angular/angular.js/issues/14740
+    </h3>
+<style>
+    input[type=date]::-webkit-clear-button {
+        /*display:none;*/
+    }
+</style>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl">
+        <form name="form">
+            <h3>
+                {{kim}}
+            </h3>
+            <input type="date" ng-model="kim" class="form-control" ng-change="reset(form)";/>
+            <button type="submit" 
+                    ng-disabled="form.$invalid" class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+            <h3>
+                {{form}}
+            </h3>
+        </form>
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        var myApp = angular.module("myApp", []);
+        myApp.directive('input', function ($timeout) {
+            return {
+                require: "ngModel",
+                link: function (scope, el, attrs, ngModel) {
+                    //  console.log(ngModel);
+                    if (attrs.type === "date") {
+                        //修正用delete值的方式,變空值時無法通過驗證 https://github.com/angular/angular.js/issues/12853
+                        //1.5.x fixed
+                        //el.on('keyup', el.triggerHandler.bind(el, 'input'));
+                        el.on('mousedown', function () {//20160613 1.5.3  https://github.com/angular/angular.js/issues/14740#issuecomment-225338947
+                            $timeout(function () {
+                                el.triggerHandler('input');
+                            }, 150, false);
+
+                        });
+                 
+                    }
+                }
+            }
+        });
+
+        var myCtrl = myApp.controller("myCtrl", function ($scope) {
+            $scope.reset = function (ngModel) {
+                //ngModel.$setPristine();
+                //ngModel.$setUntouched();
+                //ngModel.$setDirty();
+                console.log("reset");
+            }
+        });
+
+    </script>
+}
+

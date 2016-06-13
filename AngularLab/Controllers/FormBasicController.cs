@@ -23,5 +23,10 @@ namespace AngularLab.Controllers
         {
             return View();
         }
+
+        public ActionResult DateEraseTest()
+        {
+            return View();
+        }
     }
 }

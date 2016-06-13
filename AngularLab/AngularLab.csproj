@@ -1114,6 +1114,7 @@
     <Content Include="Views\AngularUi\Modal.cshtml" />
     <Content Include="Views\HtmlOption\RadioButtonList.cshtml" />
     <Content Include="Views\HtmlOption\CheckButtonList.cshtml" />
+    <Content Include="Views\FormBasic\DateEraseTest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
