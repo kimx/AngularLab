@@ -9,16 +9,35 @@
     <div ng-controller="myCtrl">
         <h3>{{Codes}}</h3>
         <form autocomplete="off" class="form-horizontal ng-pristine ng-valid" id="editForm" method="POST" name="editForm" novalidate="" sc-form-event="N">
-            Apple <input  ng-model="dummy1" type="checkbox" name="Kim" value="Apple"
-                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('Apple')>-1" 
-                          ng-change="index=Codes.indexOf('Apple');index==-1 ? Codes.push('Apple'):Codes.splice(index,1);changed()" />
-            hTC   <input  ng-model="dummy2" type="checkbox" name="Kim" value="hTC"  
-                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('hTC')>-1" 
-                          ng-change="index=Codes.indexOf('hTC');index==-1 ? Codes.push('hTC'):Codes.splice(index,1);changed()" />
-            Nokia <input  ng-model="dummy3" type="checkbox" name="Kim" value="Nokia" 
-                          ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('Nokia')>-1" 
-                          ng-change="index=Codes.indexOf('Nokia');index==-1 ? Codes.push('Nokia'):Codes.splice(index,1);changed()" />
-          
+            @*Apple <input ng-model="dummy1" type="checkbox" name="Kim" 
+                         ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('Apple')>-1"
+                         ng-change="index=Codes.indexOf('Apple');index==-1 ? Codes.push('Apple'):Codes.splice(index,1);changed()" />
+            hTC   <input ng-model="dummy2" type="checkbox" name="Kim" 
+                         ng-checked="Codes==null ? Codes=[]:Codes=Codes; Codes.indexOf('hTC')>-1"
+                         ng-change="index=Codes.indexOf('hTC');index==-1 ? Codes.push('hTC'):Codes.splice(index,1);changed()" />*@
+            Apple <input ng-model="dummy1" type="checkbox" name="Kim"
+                         ng-checked="Codes.indexOf('Apple')>-1"
+                         ng-click="dummy1 ? Codes.push('Apple'):Codes.splice(Codes.indexOf('Apple'),1);changed(dummy3)" />
+            hTC  <input ng-model="dummy2" type="checkbox" name="Kim"
+                         ng-checked="Codes.indexOf('hTC')>-1"
+                         ng-click="dummy2 ? Codes.push('hTC'):Codes.splice(Codes.indexOf('hTC'),1);changed(dummy3)" />
+            Nokia <input ng-model="dummy3" type="checkbox" name="Kim" 
+                         ng-checked="Codes.indexOf('Nokia')>-1"
+                         ng-click="dummy3 ? Codes.push('Nokia'):Codes.splice(Codes.indexOf('Nokia'),1);changed(dummy3)" />
+
+         <h3>{{dummy3}}</h3>
+            <div class="checkbox"><label>
+                <input id="vm_Model_Options" name="Codes" 
+                       ng-checked="Codes.indexOf('Nokia')>-1" 
+                       ng-click="Dummy_vm_Model_Options_1 ? Codes.push('Nokia') : Codes.splice(Codes.indexOf('Nokia'), 1)" 
+                       ng-model="Dummy_vm_Model_Options_1" placeholder="" sg-descript="" type="checkbox" 
+                       value="1" class="ng-pristine ng-untouched ng-valid ng-empty">Nokia</label></div>
+            <div class="checkbox"><label>
+                <input id="vm_Model_Options" name="Codes"
+                        ng-checked="Codes.indexOf('hTC')>-1" 
+                       ng-click="Dummy_vm_Model_Options_2 ? Codes.push('hTC') : Codes.splice(Codes.indexOf('hTC'), 1)"
+                        ng-model="Dummy_vm_Model_Options_2" placeholder="" sg-descript="" type="checkbox" 
+                       value="2" class="ng-pristine ng-untouched ng-valid ng-empty">hTC</label></div>
         </form>
         <div ng-init="init()"></div>
     </div>
@@ -29,14 +48,29 @@
         var myCtrl = myApp.controller("myCtrl", function ($scope) {
             // $scope.Codes = [{ CodeNo: "Apple" }, { CodeNo: "hTC" }, { CodeNo: "Nokia" }];
             // $scope.Codes = ["Apple", "Nokia"];
+            $scope.Codes = null;
             $scope.print = function () {
-                console.log($scope.Codes);
+             //   console.log($scope.Codes);
             }
             $scope.init = function () {
-                $scope.Codes = null;
+                  $scope.Codes = ["Nokia","Apple"];
+                //$scope.Codes = null;
             }
-            $scope.changed = function () {
+            $scope.changed = function (dummy3) {
+                //Codes = $scope.Codes;
                 console.log($scope.Codes);
+                //console.log(Codes);
+                //index = Codes.indexOf(dummy3);
+                //index == -1 ? Codes.push(dummy3) : Codes.splice(index, 1);
+                //console.log(index);
+                //console.log(Codes);
+            }
+
+            $scope.myCheck = function (value) {
+                Codes = $scope.Codes;
+                var r =  Codes.indexOf(value) > -1;
+             
+                return r;
             }
         });
 
