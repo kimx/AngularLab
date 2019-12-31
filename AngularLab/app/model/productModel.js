@@ -2,7 +2,7 @@ var scModules;
 (function (scModules) {
     var model;
     (function (model) {
-        var productModel = (function () {
+        var productModel = /** @class */ (function () {
             function productModel() {
             }
             return productModel;

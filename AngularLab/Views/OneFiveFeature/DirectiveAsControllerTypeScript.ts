@@ -9,7 +9,7 @@
                     .otherwise({ redirectTo: "/Index" })
                     ;
             });
-            app.component("fooComp", new myComponent());
+            app.component("fooComp", new mySplitComponent());
         }
     }
 
@@ -21,14 +21,15 @@
         };
         controllerAs = 'vm';
     }
-    //同上使用方式
-    export class myComponentSplitController {
+    //同上使用方式,獨立Controller的寫法
+    //   app.component("fooComp", new mySplitComponent());
+    export class mySplitComponent {
         templateUrl = "/OneFiveFeature/DirectiveAsControllerMain";
         controller = myController;
         controllerAs = 'vm';
     }
 
-    export class myController {
+     class myController {
         myFoo: string;
         constructor(private $scope) {
             $scope.foo = 'myComponent Standalone';

@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "File Upload";
+}
+
+<h2>File Upload:resumeChunkSize 測試</h2>
+<div ng-app="phoneApp">
+    <div class="container-fluid">
+        <div class="row" ng-controller="phoneCtrl as vm">
+            <div class="col-md-3">
+                <div class="input-group">
+
+                    <input type="file" ngf-select ng-model="vm.FileToAttach" class="form-control" />
+                    <span class="input-group-btn">
+                        <button ng-click="vm.AttachFile();"
+                                type="button" class="btn btn-default">
+                            Upload
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{vm.Name}}
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        var phoneApp = angular.module("phoneApp", ['ngFileUpload']);
+        var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope, Upload) {
+            var vm = { Name: "KIM" };
+            vm.AttachFile = function () {
+                if (!vm.FileToAttach)
+                    return;
+                var guid = vm.Guid();
+                var model = {
+                    FILE_SIZE: vm.FileToAttach.size,
+                    MIME_TYPE: vm.FileToAttach.type,
+                    ORI_FILE_NAME: vm.FileToAttach.name,
+                    File: vm.FileToAttach,
+                    Guid: guid,
+                };
+                var setting = {
+                    url: '/FileUpload/UploadFile',
+                    data: model,
+                    resumeChunkSize: 1024 * 1024,//1mg,
+
+                };
+
+                Upload.upload(setting).then(function (response) {
+                    console.log("Ok");
+                    console.log(response);
+
+                }, function (response) {
+                    if (response.status > 0) {
+                        vm.errorMsg = response.status + ': ' + response.data;
+                    }
+                }, function (evt) {
+                    vm.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    console.log(evt);
+                    console.log(vm.progress);
+                });
+            }
+
+            vm.Guid = function () {
+                var d = Date.now();
+                if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+                    d += performance.now(); //use high-precision timer if available
+                }
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (d + Math.random() * 16) % 16 | 0;
+                    d = Math.floor(d / 16);
+                    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                });
+            }
+            return vm;
+        });
+    </script>
+}

@@ -5,7 +5,7 @@ var scModules;
 (function (scModules) {
     var app;
     (function (app_1) {
-        var crudApp = (function () {
+        var crudApp = /** @class */ (function () {
             function crudApp() {
                 var app = angular.module("crudApp", []);
                 app.service("indexService", scModules.service.indexService);

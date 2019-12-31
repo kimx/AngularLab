@@ -1,6 +1,6 @@
 var Lab;
 (function (Lab) {
-    var App = (function () {
+    var App = /** @class */ (function () {
         function App() {
             var app = angular.module("myApp", ['ngRoute']);
             app.config(function ($routeProvider) {
@@ -8,12 +8,12 @@ var Lab;
                     .when("/Index", { template: "<foo-comp></foo-comp>" })
                     .otherwise({ redirectTo: "/Index" });
             });
-            app.component("fooComp", new myComponent());
+            app.component("fooComp", new mySplitComponent());
         }
         return App;
     }());
     Lab.App = App;
-    var myComponent = (function () {
+    var myComponent = /** @class */ (function () {
         function myComponent() {
             this.templateUrl = "/OneFiveFeature/DirectiveAsControllerMain";
             this.controller = function ($scope) {
@@ -25,17 +25,18 @@ var Lab;
         return myComponent;
     }());
     Lab.myComponent = myComponent;
-    //同上使用方式
-    var myComponentSplitController = (function () {
-        function myComponentSplitController() {
+    //同上使用方式,獨立Controller的寫法
+    //   app.component("fooComp", new mySplitComponent());
+    var mySplitComponent = /** @class */ (function () {
+        function mySplitComponent() {
             this.templateUrl = "/OneFiveFeature/DirectiveAsControllerMain";
             this.controller = myController;
             this.controllerAs = 'vm';
         }
-        return myComponentSplitController;
+        return mySplitComponent;
     }());
-    Lab.myComponentSplitController = myComponentSplitController;
-    var myController = (function () {
+    Lab.mySplitComponent = mySplitComponent;
+    var myController = /** @class */ (function () {
         function myController($scope) {
             this.$scope = $scope;
             $scope.foo = 'myComponent Standalone';
@@ -43,6 +44,5 @@ var Lab;
         }
         return myController;
     }());
-    Lab.myController = myController;
 })(Lab || (Lab = {}));
 //# sourceMappingURL=DirectiveAsControllerTypeScript.js.map

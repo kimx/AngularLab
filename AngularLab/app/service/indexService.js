@@ -2,7 +2,7 @@ var scModules;
 (function (scModules) {
     var service;
     (function (service) {
-        var indexService = (function () {
+        var indexService = /** @class */ (function () {
             function indexService($http) {
                 this.$http = $http;
             }

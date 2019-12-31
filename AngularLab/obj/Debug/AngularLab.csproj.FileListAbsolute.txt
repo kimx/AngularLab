@@ -65,6 +65,7 @@ D:\GitHub\AngularLab\AngularLab\bin\zh-Hans\System.Spatial.resources.dll
 D:\GitHub\AngularLab\AngularLab\bin\zh-Hant\System.Spatial.resources.dll
 D:\GitHub\AngularLab\AngularLab\bin\zh-Hant\System.Web.Http.resources.dll
 D:\GitHub\AngularLab\AngularLab\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
-D:\GitHub\AngularLab\AngularLab\obj\Debug\AngularLab.csprojResolveAssemblyReference.cache
 D:\GitHub\AngularLab\AngularLab\obj\Debug\AngularLab.dll
 D:\GitHub\AngularLab\AngularLab\obj\Debug\AngularLab.pdb
+D:\GitHub\AngularLab\AngularLab\obj\Debug\AngularLab.csprojAssemblyReference.cache
+D:\GitHub\AngularLab\AngularLab\obj\Debug\AngularLab.csproj.CopyComplete

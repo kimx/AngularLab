@@ -2,7 +2,7 @@ var scModules;
 (function (scModules) {
     var controller;
     (function (controller) {
-        var indexController = (function () {
+        var indexController = /** @class */ (function () {
             function indexController($scope, indexService) {
                 this.$scope = $scope;
                 this.indexService = indexService;
@@ -21,6 +21,18 @@ var scModules;
             return indexController;
         }());
         controller.indexController = indexController;
+        //class indexCtrl {
+        //    constructor(private $scope) {
+        //        $scope.init = init;
+        //        $scope.test = test;
+        //        function test(url) {
+        //            $scope.url = "test:" + url;
+        //        }
+        //        function init(url) {
+        //            $scope.url = "init2:" + url;
+        //        }
+        //    }
+        //}
     })(controller = scModules.controller || (scModules.controller = {}));
 })(scModules || (scModules = {}));
 //# sourceMappingURL=indexController.js.map

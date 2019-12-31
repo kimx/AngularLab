@@ -34,3 +34,6 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+/AngularLab/Upload
+/.vs/AngularLab/v16/Server/sqlite3/db.lock
+/.vs/AngularLab/v16

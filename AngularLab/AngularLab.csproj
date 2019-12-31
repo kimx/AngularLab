@@ -23,6 +23,7 @@
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1012,6 +1013,7 @@
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ng-file-upload.min.js" />
     <Content Include="Scripts\ng-grid.js" />
     <Content Include="Scripts\ng-grid.min.js" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1051,6 +1053,7 @@
     <Compile Include="Controllers\DirectiveController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\FormBasicController.cs" />
     <Compile Include="Controllers\GridLabController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1076,6 +1079,7 @@
     <Folder Include="app\partial\" />
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\modules\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Developer\Directive.cshtml" />
@@ -1115,6 +1119,7 @@
     <Content Include="Views\HtmlOption\RadioButtonList.cshtml" />
     <Content Include="Views\HtmlOption\CheckButtonList.cshtml" />
     <Content Include="Views\FormBasic\DateEraseTest.cshtml" />
+    <Content Include="Views\FileUpload\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
