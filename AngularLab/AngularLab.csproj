@@ -1072,14 +1072,15 @@
     <Compile Include="Models\ProductEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\DbConextMock.cs" />
+    <Compile Include="Upload\ScLogActionFilterAttribute.cs" />
     <Compile Include="WebApi\CategoryController.cs" />
     <Compile Include="WebApi\CategoryEntitiesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\partial\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
     <Folder Include="Scripts\modules\" />
-    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Developer\Directive.cshtml" />

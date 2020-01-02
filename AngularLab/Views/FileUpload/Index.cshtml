@@ -9,7 +9,7 @@
             <div class="col-md-3">
                 <div class="input-group">
 
-                    <input type="file" ngf-select ng-model="vm.FileToAttach" class="form-control" />
+                    <input type="file" ngf-select ng-disabled="vm.Uploading" ng-model="vm.FileToAttach" class="form-control" />
                     <span class="input-group-btn">
                         <button ng-click="vm.AttachFile();"
                                 type="button" class="btn btn-default">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                {{vm.Name}}
+                {{vm.FileToAttach.name}}
             </div>
         </div>
     </div>
@@ -29,10 +29,11 @@
     <script>
         var phoneApp = angular.module("phoneApp", ['ngFileUpload']);
         var phoneCtrl = phoneApp.controller("phoneCtrl", function ($scope, Upload) {
-            var vm = { Name: "KIM" };
+            var vm = { Name: "KIM" ,Uploading:false};
             vm.AttachFile = function () {
                 if (!vm.FileToAttach)
                     return;
+                vm.Uploading = true;
                 var guid = vm.Guid();
                 var model = {
                     FILE_SIZE: vm.FileToAttach.size,
@@ -44,10 +45,11 @@
                 var setting = {
                     url: '/FileUpload/UploadFile',
                     data: model,
-                    resumeChunkSize: 1024 * 1024,//1mg,
+                    //  resumeChunkSize: 1024 * 1024,//1mg,
 
                 };
 
+    
                 Upload.upload(setting).then(function (response) {
                     console.log("Ok");
                     console.log(response);

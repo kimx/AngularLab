@@ -24,6 +24,25 @@ namespace AngularLab.Controllers
         public ActionResult UploadFile(AttachFileModel model)
         {
             //System.Threading.Thread.Sleep(1000);
+            var dir = Server.MapPath("~/Upload/Result");//檔案上傳目錄
+            dir = Path.Combine(dir, model.Guid);//臨時儲存分塊的目錄
+            if (!System.IO.Directory.Exists(dir))
+                System.IO.Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, model.File.FileName);
+            model.File.SaveAs(filePath);
+
+            return Json(new { Success = true, isLastUpload = true, margeFileName = model.File.FileName });
+        }
+
+        /// <summary>
+        /// resumeChunkSize
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UploadSplitFile(AttachFileModel model)
+        {
+            //System.Threading.Thread.Sleep(1000);
             var dir = Server.MapPath("~/Upload");//檔案上傳目錄
             dir = Path.Combine(dir, model.Guid);//臨時儲存分塊的目錄
             if (!System.IO.Directory.Exists(dir))
